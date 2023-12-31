@@ -95,6 +95,9 @@ provisioner() {
 
     # For scraper, HTTP 403s are logged as warnings for some reason.
     sed -i 's/action_level\:\ error/action_level: warning/' /var/www/wallabag/app/config/config_prod.yml
+
+    # run install again to create initial user
+    install_wallabag
 }
 
 if [ "$COMMAND_ARG1" = "wallabag" ]; then
