@@ -92,6 +92,9 @@ provisioner() {
     # Remove cache and install Wallabag
     rm -f -r /var/www/wallabag/var/cache
     su -c "SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist" -s /bin/sh nobody
+
+    # For scraper, HTTP 403s are logged as warnings for some reason.
+    sed -i 's/action_level\:\ error/action_level: warning/' /var/www/wallabag/app/config/config_prod.yml
 }
 
 if [ "$COMMAND_ARG1" = "wallabag" ]; then
